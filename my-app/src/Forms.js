@@ -6,6 +6,8 @@ class Form extends Component{
 
   this.state = {};
   this.submitValue = this.submitValue.bind(this);
+  this.getCityID = this.getCityID.bind(this);
+
   }
 
   render(){
@@ -17,6 +19,15 @@ class Form extends Component{
       </div>
     )
 
+  }
+
+  getCityID(){
+    let config = {'Authorization': 'Bearer 167873bcd96621d0bb49c45bfc0ffdc1', 'X-Zomato-API-Key': '167873bcd96621d0bb49c45bfc0ffdc1'}
+    axios.get('https://developers.zomato.com/api/v2.1/locations?query=San%20Diego%2C%20CA', {headers:config}).then(res => {
+      console.log(res.location_suggestions.entity_id);
+      var cityID = res.location_suggestions.entity_id;
+    }
+    )
   }
 
   submitValue(){
