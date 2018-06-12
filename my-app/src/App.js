@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
+import StarRatings from 'react-star-ratings';
 
 
 class App extends Component {
@@ -11,7 +12,7 @@ class App extends Component {
       this.state = {};
   }
 
-  componentDidMount() {
+  componentDidMount() { //stop updating with componentDidUpdate
     let config = {'Authorization': 'Bearer 167873bcd96621d0bb49c45bfc0ffdc1', 'X-Zomato-API-Key': '167873bcd96621d0bb49c45bfc0ffdc1'};
     axios.get('https://developers.zomato.com/api/v2.1/search?entity_id=302&entity_type=city&count=100', {headers: config}).then(res => {
       console.log(res.data.restaurants);
@@ -29,7 +30,7 @@ class App extends Component {
   render() {
 
     return (
-      <div>
+      <div id="app">
       <h1>{this.state.name}</h1>
       <h2>{this.state.address}</h2>
       <h3>price: {this.state.price}</h3>
