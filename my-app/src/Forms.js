@@ -19,15 +19,13 @@ class Form extends Component{
       <input type="text" id="form" placeholder="Enter City (ex: Albany, NY)"></input>
       <button type="button" onClick={this.submitValue}>Submit</button>
       </form>
-      <App cityCode={this.state.cityID} changestate={this.changeState.bind(this)} />
+      <App cityCode={this.state.cityID} />
       </div>
     )
 
   }
 
-  changeState(){
-    this.setState({town:this.state.cityID});
-  }
+
 
   getCityID(){
     let query = this.state.cityName.replace(' ','%20').replace(', ','%2C%20');
