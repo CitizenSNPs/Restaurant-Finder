@@ -9,24 +9,27 @@ class App extends Component {
 
   constructor(props){
     super(props);
-      this.state = {cityID:this.props.cityCode};
-      this.updateState = this.updateState.bind(this);
+      this.state = {cityID:this.props.cityID};
   }
 
-  updateState(){
-    this.setState(this.state);
+
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps);
+    this.setState(nextProps);
     console.log(this.state);
   }
 
-  componentWillReceiveProps(){
-    this.setState({cityID:this.props.cityID}, function(){
-    console.log(this.state);
-  });
-}
+  componentDidUpdate(prevState){
+    if (prevState === this.state){
+      this.setState({cityID: this.props.cityID})
+      console.log(this.state);
+    }
+
+  }
 
 
-  componentDidMount() { //stop updating with componentDidUpdate
-    let config = {'X-Zomato-API-Key': '167873bcd96621d0bb49c45bfc0ffdc1', 'entity_id':this.props.cityCode, 'entity_type':'city'};
+  componentDidMount() {
+    let config = {'X-Zomato-API-Key': '167873bcd96621d0bb49c45bfc0ffdc1', 'entity_id':this.state.cityCode, 'entity_type':'city'};
     axios.get('https://developers.zomato.com/api/v2.1/search', {headers: config}).then(res => {
       console.log(res.data.restaurants);
         let index = Math.floor(Math.random()*(res.data.restaurants.length)); //generates a random index
@@ -37,8 +40,8 @@ class App extends Component {
                       image: res.data.restaurants[index].restaurant.featured_image
                       }); //returned result must be converted to string since Object returns are not valid
     });
-
   }
+
 
 
   render() {
@@ -49,11 +52,9 @@ class App extends Component {
       <h2>{this.state.address}</h2>
       <h3>price: {this.state.price}</h3>
       <h3>rating: {this.state.rating}</h3>
-      <img src= {this.state.image} />
+      <img src= {this.state.image} alt="" />
       </div>
     );
-    this.updateState();
-    console.log(this.state);
   };
 };
 
