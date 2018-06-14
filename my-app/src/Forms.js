@@ -19,7 +19,7 @@ class Form extends Component{
       <input type="text" id="form" placeholder="Enter City (ex: Albany, NY)"></input>
       <button type="button" onClick={this.submitValue}>Submit</button>
       </form>
-      <App cityCode={this.state.cityID} />
+      <App cityID={this.state.cityID} />
       </div>
     )
 
@@ -28,7 +28,8 @@ class Form extends Component{
 
 
   getCityID(){
-    let query = this.state.cityName.replace(' ','%20').replace(', ','%2C%20');
+    //string serialization
+    var query = this.state.cityName.replace(', ','%2C%20').replace(' ','%20');
     console.log(query);
      //the city needs to be a serialized code
 
@@ -37,7 +38,7 @@ class Form extends Component{
     console.log(config);
     axios.get(`https://developers.zomato.com/api/v2.1/locations?query=${query}`, {headers:config}).then(res => {
       console.log(res.data.location_suggestions[0].entity_id);
-      this.setState({cityID: res.data.location_suggestions[0].entity_id}, function(){
+      this.setState({cityID: res.data.location_suggestions[0].city_id}, function(){
         console.log(this.state);
       });
     }
