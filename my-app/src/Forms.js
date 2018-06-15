@@ -19,6 +19,7 @@ class Form extends Component{
       <input type="text" id="form" placeholder="Enter City (ex: Albany, NY)"></input>
       <button type="button" onClick={this.submitValue}>Submit</button>
       </form>
+      <h3 id="errors"></h3>
       <App cityID={this.state.cityID} />
       </div>
     )
@@ -40,9 +41,15 @@ class Form extends Component{
       console.log(res.data.location_suggestions[0].entity_id);
       this.setState({cityID: res.data.location_suggestions[0].city_id}, function(){
         console.log(this.state);
-      });
-    }
-    )
+        if (document.querySelector("#errors").innerHTML === "please enter a valid query."){
+          document.querySelector("#errors").innerHTML = "";
+        }
+        }
+      );
+}
+  ).catch(function(err){
+      document.querySelector("#errors").innerHTML = "please enter a valid query.";
+  });
   }
 
   submitValue(){
