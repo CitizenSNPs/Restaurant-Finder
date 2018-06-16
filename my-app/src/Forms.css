@@ -1,0 +1,20 @@
+body{
+  background-color: #FC6C2D;
+}
+
+.showMore{
+  display: block;
+  position: relative;
+  left: 71%;
+  top: -40px;
+}
+
+button{
+  height: 40px;
+  text-align:center;
+}
+
+input{
+  height: 40px;
+  width: 200px;
+}
