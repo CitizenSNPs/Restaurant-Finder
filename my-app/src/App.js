@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import StarRatings from 'react-star-ratings';
+import './Forms.css';
+
+
 
 
 class App extends Component {
@@ -45,7 +48,8 @@ class App extends Component {
     let entity_id = this.state.cityID;
     let config = {'user-key': '167873bcd96621d0bb49c45bfc0ffdc1'};
     let prices = ['$'];
-    axios.get(`https://developers.zomato.com/api/v2.1/search?entity_id=${entity_id}&entity_type=city&count=40`, {headers: config}).then(res => {
+    var start = Math.floor(Math.random()*80);
+    axios.get(`https://developers.zomato.com/api/v2.1/search?entity_id=${entity_id}&entity_type=city&${start}=0&count=40`, {headers: config}).then(res => {
       console.log(res.data.restaurants);
         var index = Math.floor(Math.random()*(res.data.restaurants.length)); //generates a random index
         console.log(index);
@@ -56,7 +60,7 @@ class App extends Component {
                       image: res.data.restaurants[index].restaurant.featured_image
                       });
     });
-  }
+}
 
 
 
@@ -67,7 +71,6 @@ class App extends Component {
       <h1>{this.state.name}</h1>
       <h2>{this.state.address}</h2>
       <h3>{this.state.price}</h3>
-      <h3>{this.state.rating}</h3>
       <StarRatings
         rating={this.state.rating}
         starRatedColor="blue"
@@ -75,8 +78,8 @@ class App extends Component {
         starDimension="20px"
         starSpacing="5px"
       />
-      <img src= {this.state.image} alt="no image" />
-      <button onClick={this.showInfo}>Show me another!</button>
+      <img src= {this.state.image} alt="Image Not Available"/>
+      <button className="btn btn-primary showMore" onClick={this.showInfo}>Show me another!</button>
       </div>
     );
   };

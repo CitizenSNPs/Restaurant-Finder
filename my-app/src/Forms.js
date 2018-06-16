@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import App from './App.js';
+import './Forms.css';
+
 
 class Form extends Component{
   constructor(props){
@@ -16,8 +18,8 @@ class Form extends Component{
   render(){
     return (
       <div><form>
-      <input type="text" id="form" placeholder="Enter City (ex: Albany, NY)"></input>
-      <button type="button" onClick={this.submitValue}>Submit</button>
+      <input className = "form-control-sm" type="text" id="form" placeholder="Enter City (ex: Albany, NY)"></input>
+      <button className="btn btn-primary" type="button" onClick={this.submitValue}>Submit</button>
       </form>
       <h3 id="errors"></h3>
       <App cityID={this.state.cityID} />
