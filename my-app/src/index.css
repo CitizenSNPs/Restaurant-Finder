@@ -26,4 +26,13 @@ h4{
 
 img{
   box-shadow: #934928 0px 5px 20px;
+  visibility: hidden;
+}
+
+.showMore{
+  visibility: hidden;
+}
+
+.submitCity{
+  border-radius: 0px 5px 5px 0px;
 }

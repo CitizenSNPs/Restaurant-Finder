@@ -57,8 +57,12 @@ class App extends Component {
                       address:res.data.restaurants[index].restaurant.location.address,
                       price: mapPrice(Number(res.data.restaurants[index].restaurant.price_range)),
                       rating: Number(res.data.restaurants[index].restaurant.user_rating.aggregate_rating),
-                      image: res.data.restaurants[index].restaurant.featured_image
-                      });
+                      image: res.data.restaurants[index].restaurant.featured_image,
+                      votes: "(" + Number(res.data.restaurants[index].restaurant.user_rating.votes) + " votes)"
+                    }, function() {
+                      document.querySelector('img').style = "visibility: visible";
+                      document.querySelector('.showMore').style = "visibility: visible";
+                    });
     });
 }
 
@@ -73,11 +77,12 @@ class App extends Component {
       <h3>{this.state.price}</h3>
       <StarRatings
         rating={this.state.rating}
-        starRatedColor="blue"
+        starRatedColor="#337AB7"
         starEmptyColor= "#FC6C2D"
-        starDimension="20px"
+        starDimension="30px"
         starSpacing="5px"
       />
+      <h4>{this.state.votes}</h4>
       <img src= {this.state.image} alt="Image Not Available"/>
       <button className="btn btn-primary showMore" onClick={this.showInfo}>Show me another!</button>
       </div>
