@@ -6,6 +6,7 @@ body {
   background-image: url('./food-background-edit.jpg');
   background-size: 100vw 110vh;
   background-repeat: no-repeat;
+  min-width: 528px;
 }
 
 .body, html {
@@ -22,6 +23,10 @@ body {
 #app {
   margin: auto;
   text-align: center;
+}
+
+#errors{
+  visibility: hidden;
 }
 
 h1{
@@ -102,5 +107,5 @@ img{
 input{
   margin: auto;
   height: 40px;
-  width: 200px;
+  width: 20%;
 }

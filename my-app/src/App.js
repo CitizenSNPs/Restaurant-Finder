@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
-import './App.css';
 import axios from 'axios';
 import StarRatings from 'react-star-ratings';
-import './Forms.css';
-
-
-
 
 class App extends Component {
-
 
   constructor(props){
     super(props);
       this.state = {}
       this.showInfo = this.showInfo.bind(this);
   }
-
 
   componentWillReceiveProps(nextProps){
     if (nextProps.cityID !== this.props.cityID){
@@ -25,18 +18,8 @@ class App extends Component {
   }
 }
 
-
-
-  componentDidMount(){
-    console.log(this.state);
-  }
-
-  componentDidUpdate() {
-    console.log(this.state);
-  }
-
+  // returns city/restaurant info
   showInfo() {
-    console.log(this.state.cityID);
 
     var mapPrice = function(prices){
       var list = [];
@@ -50,9 +33,7 @@ class App extends Component {
     let prices = ['$'];
     var start = Math.floor(Math.random()*80);
     axios.get(`https://developers.zomato.com/api/v2.1/search?entity_id=${entity_id}&entity_type=city&${start}=0&count=40`, {headers: config}).then(res => {
-      console.log(res.data.restaurants);
-        var index = Math.floor(Math.random()*(res.data.restaurants.length)); //generates a random index
-        console.log(index);
+        var index = Math.floor(Math.random()*(res.data.restaurants.length)); //generates a random index between 0 and Object length
         this.setState({name: res.data.restaurants[index].restaurant.name,
                       address:res.data.restaurants[index].restaurant.location.address,
                       price: mapPrice(Number(res.data.restaurants[index].restaurant.price_range)),
@@ -66,8 +47,6 @@ class App extends Component {
     });
 }
 
-
-
   render() {
 
     return (
@@ -77,8 +56,8 @@ class App extends Component {
       <h3>{this.state.price}</h3>
       <StarRatings
         rating={this.state.rating}
-        starRatedColor="#337AB7"
-        starEmptyColor= "#FC6C2D"
+        starRatedColor="white"
+        starEmptyColor= "transparent"
         starDimension="30px"
         starSpacing="5px"
       />

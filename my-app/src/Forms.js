@@ -1,67 +1,50 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import App from './App.js';
-import './Forms.css';
 
 
 class Form extends Component{
   constructor(props){
     super(props);
-
   this.state = {};
   this.submitValue = this.submitValue.bind(this);
   this.getCityID = this.getCityID.bind(this);
-
   }
 
 
   render(){
     return (
       <div><form>
-      <input className = "form-control-sm" type="text" id="form" placeholder="Enter City (ex: Albany, NY)"></input>
-      <button className="btn btn-primary" type="button" onClick={this.submitValue}>Submit</button>
+      <input className = "input-group-mb-3" type="text" id="form" placeholder="Enter City (ex: Albany, NY)"></input>
+      <button className="btn btn-outline-secondary submitCity" type="button" onClick={this.submitValue}>Submit</button>
       </form>
-      <h3 id="errors"></h3>
+      <h4 id="errors"></h4>
       <App cityID={this.state.cityID} />
       </div>
     )
 
   }
 
-
-
   getCityID(){
-    //string serialization
+    //create serialized code
     var query = this.state.cityName.replace(', ','%2C%20').replace(' ','%20');
-    console.log(query);
-     //the city needs to be a serialized code
-
-
+    document.querySelector("#errors").style.visibility = "hidden";
     let config = {'user-key': '167873bcd96621d0bb49c45bfc0ffdc1'}
-    console.log(config);
     axios.get(`https://developers.zomato.com/api/v2.1/locations?query=${query}`, {headers:config}).then(res => {
-      console.log(res.data.location_suggestions[0].entity_id);
-      this.setState({cityID: res.data.location_suggestions[0].city_id}, function(){
-        console.log(this.state);
-        if (document.querySelector("#errors").innerHTML === "please enter a valid query."){
-          document.querySelector("#errors").innerHTML = "";
-        }
-        }
-      );
-}
-  ).catch(function(err){
-      document.querySelector("#errors").innerHTML = "please enter a valid query.";
+      this.setState({cityID: res.data.location_suggestions[0].city_id});
+    }).catch(function(err){
+      document.querySelector("#errors").style.visibility = "visible";
+      document.querySelector("#errors").innerHTML = "Please enter a valid city. Ex: Albany, NY";
   });
   }
 
+
   submitValue(){
-      console.log(document.getElementById('form').value);
       this.setState({cityName: document.getElementById('form').value}, function(){
           this.getCityID();
         });
   }
+
 }
-
-
 
 export default Form;
