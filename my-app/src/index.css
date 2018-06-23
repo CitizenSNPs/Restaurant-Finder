@@ -3,36 +3,104 @@ body {
   margin: 0;
   padding: 0;
   font-weight: 800;
+  background-image: url('./food-background-edit.jpg');
+  background-size: 100vw 110vh;
+  background-repeat: no-repeat;
 }
 
+.body, html {
+  background-color: transparent;
+  font-family: Helvetica;
+  z-index: 1000;
+}
+
+
+.App {
+  text-align: center;
+}
+
+#app {
+  margin: auto;
+  text-align: center;
+}
 
 h1{
   font-weight: 600;
+  color: white;
+  text-shadow: 2px 2px black;
 }
+
 h2{
   font-weight: 100;
   font-size: 18pt;
+  color: white;
+  text-shadow: 2px 2px black;
+  font-family: Helvetica;
 }
 
 h3{
   font-weight: 400;
+  color: white;
+  text-shadow: 2px 2px black;
 }
 
 h4{
   display: inline-block;
   font-weight: 400;
   font-size: 14pt;
+  color: white;
+  text-shadow: 2px 2px black;
 }
 
 img{
-  box-shadow: #934928 0px 5px 20px;
+  box-shadow: black 0px 2px 5px;
   visibility: hidden;
+  filter: saturate(1.15);
+  border: solid black 1px;
+  border-radius: 2%;
+  height: 50vh;
+  width: 40vw;
+  display: block;
+  margin-left:auto;
+  margin-right: auto;
 }
 
 .showMore{
   visibility: hidden;
+  background-color: #68cf31;
+  border: darkgray;
+  box-shadow: black 0px 1px 5px;
+  display: block;
+  position: relative;
+  left: 71%;
+  top: -40px;
+}
+
+.showMore:hover{
+  background-color: #555555;
 }
 
 .submitCity{
   border-radius: 0px 5px 5px 0px;
+  background-color: #68cf31;
+  vertical-align: top;
+  color: white;
+}
+
+.btn{
+  height: 40px;
+  text-align:center;
+  outline: 0 !important;
+}
+
+.btn:focus {
+   outline: none !important;
+   background-color: #555555;
+   box-shadow: none;
+}
+
+input{
+  margin: auto;
+  height: 40px;
+  width: 200px;
 }
